@@ -1,17 +1,18 @@
 <div class="jumbotron">
   <h1>Find Your Project</h1>
   <p class="lead">
+    <pre>Currently Selected Project: {{projectName | json}}</pre>
     <div class='container-fluid' ng-controller="TypeaheadCtrl">
-      <pre>Currently Selected Project: {{projectCode | json}}</pre>
-      <input type="text" ng-model="projectCode" placeholder="Start typing your project code" typeahead="address for address in getLocation($viewValue)" typeahead-loading="loadingProjectCode" class="form-control">
-      <i ng-show="loadingProjectCode" class="glyphicon glyphicon-refresh"></i>
-      <input type="text" ng-model="orgCode" placeholder="Start typing your organization code" typeahead="address for address in getLocation($viewValue)" typeahead-loading="loadingOrgCode" class="form-control">
+      <input type="text" ng-model="projectNumber" placeholder="Start typing your project number..." typeahead="select for select in getProjectNumber($viewValue)" typeahead-loading="loadingProjectNumber" class="form-control">
+      <i ng-show="loadingProjectNumber" class="glyphicon glyphicon-refresh"></i>
+      <input type="text" ng-model="orgCode" placeholder="Start typing your organization code..." typeahead="select for select in getOrgCode($viewValue)" typeahead-loading="loadingOrgCode" class="form-control">
       <i ng-show="loadingOrgCode" class="glyphicon glyphicon-refresh"></i>
-      <input type="text" ng-model="projectDate" placeholder="Start typing the project date" typeahead="address for address in getLocation($viewValue)" typeahead-loading="loadingProjectDate" class="form-control">
+      <input type="text" ng-model="projectDate" placeholder="Start typing the project reporting month end" typeahead="address for address in getLocation($viewValue)" typeahead-loading="loadingProjectDate" class="form-control">
       <i ng-show="loadingProjectDate" class="glyphicon glyphicon-refresh"></i>
+      <br>
+      <a class="btn btn-lg btn-danger" ng-class="successVar" ng-href="#" ng-model="successButton">Project Data Required!<span ng-class="glyphVar"></span></a>
     </div>
   </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
 </div>
 
 <div class="row marketing">
