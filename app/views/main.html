@@ -1,17 +1,35 @@
-<div class="jumbotron">
+<div class="jumbotron" ng-controller="TypeaheadCtrl">
+  <alert ng-repeat="projNumAlert in projNumAlerts" type="{{projNumAlert.type}}" close="closeProjNumAlert($index)">{{projNumAlert.msg}}</alert>
+  <alert ng-repeat="orgCodeAlert in orgCodeAlerts" type="{{orgCodeAlert.type}}" close="closeOrgCodeAlert($index)">{{orgCodeAlert.msg}}</alert>
   <h1>Find Your Project</h1>
   <p class="lead">
     <pre>Currently Selected Project: {{projectName | json}}</pre>
-    <div class='container-fluid' ng-controller="TypeaheadCtrl">
-      <input type="text" ng-model="projectNumber" placeholder="Start typing your project number..." typeahead="select for select in getProjectNumber($viewValue)" typeahead-loading="loadingProjectNumber" class="form-control">
-      <i ng-show="loadingProjectNumber" class="glyphicon glyphicon-refresh"></i>
-      <input type="text" ng-model="orgCode" placeholder="Start typing your organization code..." typeahead="select for select in getOrgCode($viewValue)" typeahead-loading="loadingOrgCode" class="form-control">
-      <i ng-show="loadingOrgCode" class="glyphicon glyphicon-refresh"></i>
-      <input type="text" ng-model="projectDate" placeholder="Start typing the project reporting month end" typeahead="address for address in getLocation($viewValue)" typeahead-loading="loadingProjectDate" class="form-control">
-      <i ng-show="loadingProjectDate" class="glyphicon glyphicon-refresh"></i>
-      <br>
-      <a class="btn btn-lg btn-danger" ng-class="successVar" ng-href="#" ng-model="successButton">Project Data Required!<span ng-class="glyphVar"></span></a>
-    </div>
+    <form class="form-horizontal" role="form">
+      <div class="form-group">
+        <label for="inputProjNum" class="col-sm-3 control-label"><small>Project Number</small></label>
+        <div class="col-sm-9">
+          <input type="text" id="inputProjNum" ng-model="projectNumber" placeholder="Start typing your project number..." typeahead="select for select in getProjectNumber($viewValue)" class="form-control" ng-init="projectNumber=''">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputOrgCode" class="col-sm-3 control-label"><small>Organization Code</small></label>
+        <div class="col-sm-9">
+          <input type="text" id="inputOrgCode" ng-model="orgCode" placeholder="Start typing your organization code..." typeahead="select for select in getOrgCode($viewValue)" class="form-control" ng-init="orgCode=''">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputReportingDate" class="col-sm-3 control-label"><small>Reporting Month End</small></label>
+        <div class="col-sm-9">
+          <p class="input-group">
+          <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+          </p>
+        </div>
+      </div>
+    <a ng-class="{true: 'btn btn-lg btn-success', false: 'btn btn-lg btn-danger'}[successVar]" ng-href="#" ng-model="successButton">Project Data Required!<span ng-class="glyphVar"></span></a>
+    </form>
   </p>
 </div>
 

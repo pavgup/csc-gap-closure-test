@@ -20,6 +20,10 @@ angular
   ])
   .config(function ($routeProvider) {
     $routeProvider
+      .when('/FYChallenge', {
+        templateUrl: 'views/fychallenge.html',
+        controller: 'FYChallengeCtrl'
+      })
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
@@ -31,4 +35,29 @@ angular
       .otherwise({
         redirectTo: '/'
       });
+  })
+  .service('sharedProperties', function() {
+    var projNum = '';
+    var orgCode = '';
+    var projMeta;
+    return {
+      getProjNum: function() {
+        return projNum;
+      },
+      getOrgCode: function() {
+        return orgCode;
+      },
+      getProjMeta: function() {
+        return projMeta;
+      },
+      setProjNum: function(value) {
+        projNum = value;
+      },
+      setOrgCode: function(value) {
+        orgCode =  value;
+      },
+      setProjMeta: function(value) {
+        projMeta = value;
+      }
+    };
   });
